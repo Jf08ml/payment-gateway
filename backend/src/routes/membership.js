@@ -4,5 +4,5 @@ import { createMembership, getMemberships } from "../controllers/membershipContr
 const router = Router();
 
 router.post("/createmembership", createMembership);
-router.get("/getmemberships", getMemberships)
+router.get("/getmemberships", getMemberships);
 export default router;
