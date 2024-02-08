@@ -68,11 +68,11 @@ backend/src/*.tgz
 backend/src/.yarn-integrity
 
 # dotenv environment variable files
-backend/src/.env
-backend/src/.env.development.local
-backend/src/.env.test.local
-backend/src/.env.production.local
-backend/src/.env.local
+backend/.env
+backend/.env.development.local
+backend/.env.test.local
+backend/.env.production.local
+backend/.env.local
 
 # parcel-bundler cache (https://parceljs.org/)
 backend/src/.cache
@@ -154,3 +154,10 @@ frontend/src/*.sketch
 
 # Ignore node_modules
 frontend/node_modules
+
+# dotenv environment variable files
+frontend/.env
+frontend/.env.development.local
+frontend/.env.test.local
+frontend/.env.production.local
+frontend/.env.local
