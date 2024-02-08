@@ -79,10 +79,7 @@ async function paymentNotifications(req, res) {
       approved_date: response.data.approved_date,
     };
 
-    const paymentData = await PaymentDbService.updatePayment(
-      payment_id,
-      paymentUpdate
-    );
+    const paymentData = await PaymentDbService.updatePayment(payment_id, paymentUpdate);
 
     if (paymentData.status === "PAID" && paymentData.coupon !== null) {
       const coupon = await CouponService.getCouponById(paymentData.coupon);
@@ -94,28 +91,41 @@ async function paymentNotifications(req, res) {
 
     const htmlBody = generatePaymentEmailTemplate(paymentData);
 
-    await sendEmail({
-      to: paymentData.payer.email,
-      subject: "Pago de membresía",
-      htmlBody,
-    });
+    // Intento enviar el correo
+    try {
+      await sendEmail({
+        to: paymentData.payer.email,
+        subject: "Pago de membresía",
+        htmlBody,
+      });
+      console.log(`Correo enviado exitosamente a ${paymentData.payer.email}`);
+    } catch (emailError) {
+      console.error(`Error al enviar correo a ${paymentData.payer.email}:`, emailError);
+    }
 
-    const prefixFormated = paymentData.payer.prefix.replace(/\+/g, "");
-    const recipientId = prefixFormated + paymentData.payer.phone;
-    const templateName = "pago_exitoso_membresia";
-    const parameters = [
-      paymentData.payer.name,
-      paymentData.description,
-      paymentData.order_id,
-    ];
+    // Intento enviar el mensaje a WhatsApp
+    try {
+      const prefixFormated = paymentData.payer.prefix.replace(/\+/g, "");
+      const recipientId = prefixFormated + paymentData.payer.phone;
+      const templateName = "pago_exitoso_membresia";
+      const parameters = [
+        paymentData.payer.name,
+        paymentData.description,
+        paymentData.order_id,
+      ];
 
-    await sendMessageSuccessPayment(recipientId, templateName, parameters);
+      await sendMessageSuccessPayment(recipientId, templateName, parameters);
+      console.log(`Mensaje de WhatsApp enviado exitosamente a ${recipientId}`);
+    } catch (whatsappError) {
+      console.error(`Error al enviar mensaje de WhatsApp a ${recipientId}:`, whatsappError);
+    }
 
     res.status(200).send("Notification received and email sent");
   } catch (error) {
     console.error("Se ha presentado un error:", error);
-    sendResponse(res, 500, "Error al obtener el pago.");
+    res.status(500).send("Error al obtener el pago.");
   }
 }
 
 export { createPayment, getPayment, paymentNotifications };
+
