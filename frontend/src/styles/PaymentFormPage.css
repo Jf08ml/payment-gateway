@@ -1,0 +1,12 @@
+.paymentFormPage {
+    width: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .paymentForm {
+    display: flex;
+    flex-direction: column;
+  }
+  
