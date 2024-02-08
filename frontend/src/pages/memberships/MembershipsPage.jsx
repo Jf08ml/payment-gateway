@@ -45,7 +45,10 @@ const MembershipsPage = () => {
           "COP",
           currency
         );
-        return { ...membership, price: parseFloat(convertedPrice) };
+        return {
+          ...membership,
+          price: convertedPrice ? parseFloat(convertedPrice) : membership.price,
+        };
       })
     );
     setConvertedMemberships(converted);
@@ -60,7 +63,7 @@ const MembershipsPage = () => {
       currency,
     };
     navigate("/payment", {
-      state: paymentInformation ,
+      state: paymentInformation,
     });
     sessionStorage.setItem("membership", JSON.stringify(paymentInformation));
   };

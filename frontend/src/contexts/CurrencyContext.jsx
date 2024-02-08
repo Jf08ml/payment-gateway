@@ -78,6 +78,14 @@ export const CurrencyProvider = ({ children, setIsLoading }) => {
       }
     } catch (error) {
       console.error("Error fetching location: ", error);
+      setSelectedCountry({
+        name: "Colombia",
+        countryCode: "CO",
+        currency: "COP",
+        prefix: "+57",
+      });
+      setCurrenciesList(["COP", "USD"]);
+      setCurrency("COP");
     }
   };
 

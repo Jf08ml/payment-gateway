@@ -48,7 +48,7 @@ export const CurrencySelector = () => {
       onChange={handleChange}
       options={availableCurrencies}
       styles={customStyles}
-      placeholder="Select a currency"
+      placeholder="Selec. moneda"
       isSearchable
     />
   );

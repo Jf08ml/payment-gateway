@@ -47,7 +47,7 @@ export const CountrySelector = () => {
       onChange={handleChange}
       options={options}
       styles={customStyles}
-      placeholder="Seleccionar país"
+      placeholder="Selec. país"
       isSearchable
     />
   );
