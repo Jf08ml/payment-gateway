@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_BASE_URL = "http://https://api-payment-gateway.vercel.app/api";
+const API_BASE_URL = "https://api-payment-gateway.vercel.app/api";
 
 const createPayment = async (paymentData) => {
   try {
