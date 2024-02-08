@@ -30,7 +30,7 @@ async function createPayment(req, res) {
       success_url,
       back_url,
       notification_url:
-        "https://aa76-179-49-160-38.ngrok-free.app/api/payments/paymentnotifications",
+        "https://api-payment-gateway.vercel.app/api/payments/paymentnotifications",
     };
 
     const response = await axios.post(dLocalEndpointCreate, paymentData, {
