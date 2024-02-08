@@ -1,7 +1,7 @@
 import sendResponse from "../utils/response.js";
 import PaymentDbService from "../services/paymentDb.service";
 import CouponService from "../services/coupon.service";
-import { generatePaymentEmailTemplate } from "../services/emailtemplate.service.js";
+import { generatePaymentEmailTemplate } from "../services/emailTemplate.service.js";
 import { sendEmail } from "../services/email.service.js";
 import { sendMessageSuccessPayment } from "../services/whatsapp.service.js";
 
