@@ -103,7 +103,6 @@ export const CouponManagement = () => {
       <CouponForm
         isOpen={isModalOpen}
         onClose={handleCloseModal}
-        memberships={memberships}
         createNewCoupon={createNewCoupon}
         updatedCreatedCoupon={updatedCreatedCoupon}
         couponEdit={couponEdit}

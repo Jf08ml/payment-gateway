@@ -4,20 +4,21 @@ import { Modal } from "../../../components/modal";
 export const CouponForm = ({
   isOpen,
   onClose,
-  memberships,
   createNewCoupon,
   updatedCreatedCoupon,
   couponEdit,
   isEditMode,
 }) => {
-  const [coupon, setCoupon] = useState({
+  const initialState = {
     name: "",
     code: "",
     discount: "",
-    expiration: new Date(),
+    expiration: new Date().toISOString().split("T")[0],
     limit: "",
     applicable: [],
-  });
+  };
+
+  const [coupon, setCoupon] = useState(initialState);
 
   useEffect(() => {
     if (isEditMode) {
@@ -34,15 +35,14 @@ export const CouponForm = ({
     }
   }, [couponEdit, isEditMode]);
 
+  useEffect(() => {
+    if (!isOpen) {
+      setCoupon(initialState);
+    }
+  }, [isOpen]);
+
   const handleFormChange = (e) => {
     setCoupon({ ...coupon, [e.target.name]: e.target.value });
-  };
-
-  const handleMembershipChange = (e) => {
-    const selectedOptions = Array.from(e.target.selectedOptions).map(
-      (option) => option.value
-    );
-    setCoupon({ ...coupon, applicable: selectedOptions });
   };
 
   const handleFormSubmit = (e) => {
@@ -107,23 +107,6 @@ export const CouponForm = ({
               value={coupon.limit}
               onChange={handleFormChange}
             />
-          </div>
-          <div>
-          <label>Aplicable a</label>
-            <select
-              multiple
-              placeholder="Aplicable a..."
-              name="applicable"
-              value={coupon.applicable}
-              onChange={handleMembershipChange}
-              style={{ width: "100%", height: "100px" }}
-            >
-              {memberships.map((membership) => (
-                <option key={membership._id} value={membership.id}>
-                  {membership.name}
-                </option>
-              ))}
-            </select>
           </div>
           <div
             style={{
