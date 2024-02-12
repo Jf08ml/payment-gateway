@@ -82,6 +82,7 @@ const PaymentFormPage = () => {
   };
 
   const applyCoupon = async () => {
+    if(couponId != "") return alert("Ya has aplicado un cupón");
     const coupons = await getCoupons();
     const couponData = coupons.data.filter((cou) => cou.code === coupon);
     const currentDate = new Date();

@@ -8,7 +8,6 @@ const couponSchema = new mongoose.Schema({
   limit: { type: Number, required: true },
   used: { type: Number, default: 0 },
   expiration: { type: Date, required: true },
-  applicable: [{ type: mongoose.Schema.Types.ObjectId, ref: "Membership" }],
   create_at: { type: Date, default: Date.now },
   update_at: { type: Date, default: Date.now },
 });
